@@ -160,25 +160,3 @@ a= accuracy_score(test_labels,results)
 print(" Test accuracy ", a)
 tn, fp, fn, tp = confusion_matrix(test_labels, results).ravel()
 print( " train tn ,", tn, " fp ", fp, " fn ", fn, " tp ", tp )
-for ep in range(16) :
-    dqn.model.fit(train_data, train_labels, epochs=128, batch_size=32, verbose=0)     
-    e=dqn.model.evaluate(test_data, test_labels, batch_size=32)
-    if (ep + 1) % 10 == 0 :
-        dqn.target_model.set_weights(dqn.model.get_weights())
-    #d = dqn.target_model.evaluate(test_data, test_labels, batch_size=32)
-
-    #print(" e at ", ep, " ", e[1], " d ", d[1])
-dqn.target_model.set_weights(dqn.model.get_weights())
-e=dqn.model.evaluate(test_data, test_labels, batch_size=32)
-d = dqn.target_model.evaluate(test_data, test_labels, batch_size=32)
-
-print(' Final comparison ', e, " target = ", d)
-# dqn.model.save('c:/workdir/models')
-# m2= load_model('c:/workdir/models')
-
-# e = m2.evaluate(test_data, test_labels, batch_size=32)
-# e=m2(test_data[0].reshape(1,-1), training=False)
-
-# print(e.numpy())
-e=dqn.model.predict(test_data[0].reshape(1,-1), batch_size=1)
-print(e)
